@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "port=9002 node scripts/start.js",
+    "start": "PORT=9002 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
