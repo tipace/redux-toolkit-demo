@@ -3,6 +3,7 @@ import { Tabs } from 'antd';
 import 'antd/dist/antd.css';
 import { Counter } from './features/counter/Counter';
 import { Todo } from './features/todos/Todo';
+import { TodoEntity } from './features/todosEntity/Todo';
 import './App.css';
 
 const { TabPane } = Tabs;
@@ -14,6 +15,10 @@ const tabList = [
   {
     key: 'todo',
     component: Todo,
+  },
+  {
+    key: 'todoEntity',
+    component: TodoEntity,
   },
 ];
 function App() {

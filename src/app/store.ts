@@ -1,12 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import todoReducer from '../features/todos/todoSlice';
+import todoEntityReducer from '../features/todosEntity/todoSlice';
+
 import visibilityFilterReducer from '../features/filters/filtersSlice';
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     todo: todoReducer,
+    todoEntity: todoEntityReducer,
     visibilityFilter: visibilityFilterReducer,
   },
 });
