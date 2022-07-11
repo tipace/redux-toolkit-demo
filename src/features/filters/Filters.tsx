@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Radio } from 'antd';
 import type { RadioChangeEvent } from 'antd';
 import { VisibilityFilters, setVisibilityFilter } from './filtersSlice';
+import { RootState } from '../../app/store';
 
 export function Filters() {
-  const filter = useSelector((state: any) => state.visibilityFilter);
+  const filter = useSelector((state: RootState) => state.visibilityFilter);
   const dispatch = useDispatch();
 
   const changeFilter = (e: RadioChangeEvent) => {
