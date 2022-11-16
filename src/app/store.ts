@@ -1,18 +1,28 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
-import todoReducer from '../features/todos/todoSlice';
-import todoEntityReducer from '../features/todosEntity/todoSlice';
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import visibilityFilterReducer from '../features/filters/filtersSlice';
+import rootReducer from './reducers';
+
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+};
+
+const persistedReducer = persistReducer<any, any>(persistConfig, rootReducer as any);
 
 export const store = configureStore({
-  reducer: {
-    counter: counterReducer,
-    todo: todoReducer,
-    todoEntity: todoEntityReducer,
-    visibilityFilter: visibilityFilterReducer,
-  },
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
